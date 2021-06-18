@@ -1,14 +1,10 @@
 package programers;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MockExam {
 
     public static void main(String[] args) {
-        String[] participant = {"leo", "kiki", "eden"};
-        String[] completion = {"eden", "kiki"};
         int[] answers = {1,3,2,4,2};
 
         System.out.println(Arrays.toString(MockExam.solution(answers)));
