@@ -4,7 +4,7 @@ package BaekJoon;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Main {
+public class StackSequence1874 {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
