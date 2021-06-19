@@ -18,7 +18,7 @@ public class Bracket9012 {
         char rp = ')';
 
         // 처음 입력된 숫자만큼 반복문
-        for (int i = 0; i < inputSize; i++){
+        while (inputSize --> 0){
             String ps = br.readLine();
             int count = 1;
             // 입력받은 괄호문자들 첫번째가 ) 인 경우와 마지막이 ( 인 경우 반복문 안돌고 끝내기위해
