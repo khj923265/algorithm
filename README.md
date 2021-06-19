@@ -1,13 +1,18 @@
-# 알고리즘 스터디 기록💻
+# algorithm-study💻
 
-- 언어 : JAVA
+## Programming Language 
 
+* Java
 
-## [BaekJoon](https://github.com/khj923265/algorithm/tree/main/src/BaekJoon)
+## 디렉토리 바로가기
 
+* **Beakjoon** : [BaekJoon](https://github.com/khj923265/algorithm/tree/main/src/BaekJoon)
+* **Codility** : [codility](https://github.com/khj923265/algorithm/tree/main/src/codility)
+* **Programers** : [programers](https://github.com/khj923265/algorithm/tree/main/src/programers)
 
-## [codility](https://github.com/khj923265/algorithm/tree/main/src/codility)
+## 코딩테스트 사이트 바로가기
 
-
-## [programers](https://github.com/khj923265/algorithm/tree/main/src/programers)
+* **Baekjoon** : https://www.acmicpc.net/
+* **Programmers** : https://programmers.co.kr/learn/challenges
+* **Codility** : https://app.codility.com/programmers/
 
