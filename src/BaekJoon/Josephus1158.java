@@ -41,6 +41,7 @@ public class Josephus1158 {
                 sb.append(queue.poll()).append(", ");
             }
         }
+
         System.out.println(sb);
         br.close();
     }

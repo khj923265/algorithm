@@ -2,7 +2,7 @@ package BaekJoon;
 
 import java.util.Scanner;
 
-public class test {
+public class Test {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -24,5 +24,4 @@ public class test {
                 break;
         }
     }
-
 }
