@@ -3,11 +3,12 @@ package BaekJoon;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class MakingOne1463 {
 
     public static void main(String[] args) throws IOException {
-        solution();
+        solution2();
     }
 
     public static void firstSolution() throws IOException {
@@ -31,10 +32,45 @@ public class MakingOne1463 {
         br.close();
     }
 
+    public static void solution2(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int two = 0;
+        int three = 0;
+
+        int temp = n;
+
+        while (temp > 1) {
+            if (temp % 2 == 0) {
+                temp /= 2;
+                two++;
+            } else {
+                temp -= 1;
+                two++;
+            }
+        }
+        while (n > 1) {
+            if (n % 3 == 0) {
+                n /= 3;
+                three++;
+            } else {
+                n -= 1;
+                three++;
+            }
+        }
+        System.out.println(two);
+        System.out.println(three);
+        if(two < three) {
+            System.out.println(two);
+        }else {
+            System.out.println(three);
+        }
+    }
+
     public static void solution() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        int dp[]= new int[N+1];
+        int[] dp = new int[N+1];
 
         dp[0]=0; dp[1]=0; //초기화
 
