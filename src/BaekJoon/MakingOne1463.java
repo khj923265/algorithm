@@ -60,11 +60,7 @@ public class MakingOne1463 {
         }
         System.out.println(two);
         System.out.println(three);
-        if(two < three) {
-            System.out.println(two);
-        }else {
-            System.out.println(three);
-        }
+        System.out.println(Math.min(two, three));
     }
 
     public static void solution() throws IOException {
