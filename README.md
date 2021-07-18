@@ -1,10 +1,10 @@
-# algorithm-study💻
+# 알고리즘 스터디💻
 
-## Programming Language 
+## 프로그래밍 언어
 
 * Java
 
-## 디렉토리 바로가기
+## 디렉터리 바로가기
 
 * **Beakjoon** : [BaekJoon](https://github.com/khj923265/algorithm/tree/main/src/BaekJoon)
 * **Codility** : [codility](https://github.com/khj923265/algorithm/tree/main/src/codility)
