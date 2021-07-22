@@ -1,7 +1,6 @@
-package study;
+package rbstudy.one;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class MainRb2 {
 
