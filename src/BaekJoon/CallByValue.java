@@ -5,7 +5,6 @@ public class CallByValue {
         int temp = 100;
         x = y;
         y = temp;
-
     }
 
     public static void main(String[] args) {
@@ -16,16 +15,6 @@ public class CallByValue {
         swap(a, b);
         System.out.println("swap() 호출 후 : a = " + a + ", b = " + b);
 
-    }
-
-}
-
-
-class Num{
-    int num;
-
-    Num(int num){
-        this.num = num;
     }
 
 }
