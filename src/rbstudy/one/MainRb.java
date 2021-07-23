@@ -35,10 +35,16 @@ public class MainRb {
     // 전학생 바구니2 score(87) level(3)
     // 동일 점수 일 경우 이름을 기준으로 descending sort(내림차순) 해서 순위를 매김
     // 동일점수 인원이 몇명인지 출력 후 누구누구인지도 출력
-    // ex) 총 2명 2순위 마구니 100 2 2순위 바구니 100 3
+        /**
+         * ex)
+         * 총 2명
+         * 2순위 마구니 100 2
+         * 2순위 바구니 100 3
+         */
 
         List<Student> studentList = new ArrayList<>();
         StudentScoreCalculateUtil studentScoreCalculateUtil = new StudentScoreCalculateUtil();
+        StudentRankCalculateUtil studentRankCalculateUtil = new StudentRankCalculateUtil();
 
         Student student1 = new Student();
         Student student2 = new Student();
@@ -66,24 +72,9 @@ public class MainRb {
             studentScoreCalculateUtil.insertTotalScore(student);
         }
 
-        for (int i = 0; i < studentList.size(); i++){
-            studentList.get(i).setRank(1);
-            for (Student student : studentList) {
-                if (studentList.get(i).getTotalScore() < student.getTotalScore()) {
-                    studentScoreCalculateUtil.updateRankCount(studentList.get(i));
-                }
-            }
-        }
+        studentRankCalculateUtil.updateStudentsRank(studentList, studentRankCalculateUtil);
 
-        for (int i = 0; i < studentList.size(); i++){
-            for (Student student : studentList){
-                if (student.getRank() == i + 1){
-                    System.out.println(student.getRank() + "순위 "
-                        + student.getName() + " " + student.getTotalScore()
-                        + " " + student.getLevel());
-                }
-            }
-        }
+        studentRankCalculateUtil.studentRankSortPrint(studentList);
 
         Student student5 = new Student();
         Student student6 = new Student();
@@ -101,26 +92,9 @@ public class MainRb {
         studentList.add(student5);
         studentList.add(student6);
 
-        for (int i = 0; i < studentList.size(); i++){
-            studentList.get(i).setRank(1);
-            for (Student student : studentList) {
-                if (studentList.get(i).getTotalScore() < student.getTotalScore()) {
-                    studentScoreCalculateUtil.updateRankCount(studentList.get(i));
-                } else if (studentList.get(i).getTotalScore() == student.getTotalScore()){
-                    // TODO 1 2 2 4 5 6 순위를 해결해 보자
-                }
-            }
-        }
+        studentRankCalculateUtil.updateStudentsRank(studentList, studentRankCalculateUtil);
 
-        for (int i = 0; i < studentList.size(); i++){
-            for (Student student : studentList){
-                if (student.getRank() == i + 1){
-                    System.out.println(student.getRank() + "순위 "
-                        + student.getName() + " " + student.getTotalScore()
-                        + " " + student.getLevel());
-                }
-            }
-        }
+        studentRankCalculateUtil.studentRankSortPrint(studentList);
 
     }
 
@@ -205,9 +179,37 @@ public class MainRb {
             student.setTotalScore(student.getScore() + student.getAddScore());
         }
 
+    }
+
+    static class StudentRankCalculateUtil{
+
         void updateRankCount(Student student){
             student.setRank(student.getRank() + 1);
         }
+
+        void updateStudentsRank(List<Student> studentList, StudentRankCalculateUtil studentRankCalculateUtil) {
+            for (int i = 0; i < studentList.size(); i++) {
+                studentList.get(i).setRank(1);
+                for (Student student : studentList) {
+                    if (studentList.get(i).getTotalScore() < student.getTotalScore()) {
+                        studentRankCalculateUtil.updateRankCount(studentList.get(i));
+                    }
+                }
+            }
+        }
+
+        void studentRankSortPrint(List<Student> studentList) {
+            for (int i = 0; i < studentList.size(); i++) {
+                for (Student student : studentList) {
+                    if (student.getRank() == i + 1) {
+                        System.out.println(student.getRank() + "순위 "
+                                + student.getName() + " " + student.getTotalScore()
+                                + " " + student.getLevel());
+                    }
+                }
+            }
+        }
+
     }
 
 }
