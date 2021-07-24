@@ -43,8 +43,7 @@ public class MainRb {
          */
 
         List<Student> studentList = new ArrayList<>();
-        StudentScoreCalculateUtil studentScoreCalculateUtil = new StudentScoreCalculateUtil();
-        StudentRankCalculateUtil studentRankCalculateUtil = new StudentRankCalculateUtil();
+        StudentScoreAndRankCalculateUtil studentScoreAndRankCalculateUtil = new StudentScoreAndRankCalculateUtil();
 
         Student student1 = new Student();
         Student student2 = new Student();
@@ -68,13 +67,15 @@ public class MainRb {
         studentList.add(student4);
 
         for (Student student : studentList){
-            studentScoreCalculateUtil.insertAddScore(student);
-            studentScoreCalculateUtil.insertTotalScore(student);
+            studentScoreAndRankCalculateUtil.insertAddScore(student);
+            studentScoreAndRankCalculateUtil.insertTotalScore(student);
         }
 
-        studentRankCalculateUtil.updateStudentsRank(studentList, studentRankCalculateUtil);
+        studentScoreAndRankCalculateUtil.sortStudentTotalScore(studentList);
+        studentScoreAndRankCalculateUtil.insertStudentRank(studentList);
 
-        studentRankCalculateUtil.studentRankSortPrint(studentList);
+        System.out.println("===============학생 총점기준 순위 리스트 v1.0===============");
+        printStudentList(studentList);
 
         Student student5 = new Student();
         Student student6 = new Student();
@@ -85,17 +86,49 @@ public class MainRb {
         student6.setScore(87);
         student6.setLevel(3);
 
-        studentScoreCalculateUtil.insertAddScore(student5);
-        studentScoreCalculateUtil.insertTotalScore(student5);
-        studentScoreCalculateUtil.insertAddScore(student6);
-        studentScoreCalculateUtil.insertTotalScore(student6);
+        studentScoreAndRankCalculateUtil.insertAddScore(student5);
+        studentScoreAndRankCalculateUtil.insertTotalScore(student5);
+        studentScoreAndRankCalculateUtil.insertAddScore(student6);
+        studentScoreAndRankCalculateUtil.insertTotalScore(student6);
         studentList.add(student5);
         studentList.add(student6);
+        studentList.add(student6);
 
-        studentRankCalculateUtil.updateStudentsRank(studentList, studentRankCalculateUtil);
+        studentScoreAndRankCalculateUtil.sortStudentTotalScore(studentList);
+        studentScoreAndRankCalculateUtil.insertStudentRank(studentList);
 
-        studentRankCalculateUtil.studentRankSortPrint(studentList);
+        System.out.println("===============학생 2명 추가===============");
+        printStudentList(studentList);
 
+        List<Student> reduplicationRank = new ArrayList<>();
+
+        //TODO
+        // 1.동점자가 3명이상일 경우 3명 출력후 다음 반복에서 다시 2명이 나오는 문제 해결
+        // 2.이름순으로 내림차순 정렬
+        System.out.println("===============동점자 리스트===============");
+        for (int i = 0; i < studentList.size() - 1; i++){
+            if (studentList.get(i).getRank() == studentList.get(i + 1).getRank()){
+                int j = i + 1;
+                reduplicationRank.add(studentList.get(i));
+                while (studentList.get(i).getRank() == studentList.get(j).getRank()){
+                    reduplicationRank.add(studentList.get(j));
+                    j++;
+                }
+                System.out.println("총 " + (j - 1) + "명 ");
+                for (Student student : reduplicationRank){
+                    System.out.println(student.getRank() + "순위 이름: " + student.getName()
+                        + " 총점: " + student.getTotalScore() + " 레벨: " + student.getLevel());
+                }
+                reduplicationRank.clear();
+            }
+        }
+    }
+
+    private static void printStudentList(List<Student> studentList) {
+        for (Student student : studentList) {
+            System.out.println(student.getRank() + "순위 이름: " + student.getName()
+                + " 총점: " + student.getTotalScore() + " 레벨: " + student.getLevel());
+        }
     }
 
     static class Student{
@@ -163,7 +196,7 @@ public class MainRb {
         * */
     }
 
-    static class StudentScoreCalculateUtil{
+    static class StudentScoreAndRankCalculateUtil{
 
         void insertAddScore(Student student){
             if (student.getLevel() == 1) {
@@ -179,37 +212,29 @@ public class MainRb {
             student.setTotalScore(student.getScore() + student.getAddScore());
         }
 
-    }
+        void sortStudentTotalScore(List<Student> studentList){
+            for(int i = 1; i < studentList.size(); i++) {
+                Student targetStudent = studentList.get(i);
+                int j = i - 1;
 
-    static class StudentRankCalculateUtil{
-
-        void updateRankCount(Student student){
-            student.setRank(student.getRank() + 1);
-        }
-
-        void updateStudentsRank(List<Student> studentList, StudentRankCalculateUtil studentRankCalculateUtil) {
-            for (int i = 0; i < studentList.size(); i++) {
-                studentList.get(i).setRank(1);
-                for (Student student : studentList) {
-                    if (studentList.get(i).getTotalScore() < student.getTotalScore()) {
-                        studentRankCalculateUtil.updateRankCount(studentList.get(i));
-                    }
+                while(j >= 0 && targetStudent.getTotalScore() > studentList.get(j).getTotalScore()) {
+                    studentList.set(j + 1, studentList.get(j));
+                    j--;
                 }
+                studentList.set(j + 1, targetStudent);
             }
         }
 
-        void studentRankSortPrint(List<Student> studentList) {
-            for (int i = 0; i < studentList.size(); i++) {
-                for (Student student : studentList) {
-                    if (student.getRank() == i + 1) {
-                        System.out.println(student.getRank() + "순위 "
-                                + student.getName() + " " + student.getTotalScore()
-                                + " " + student.getLevel());
-                    }
+        void insertStudentRank(List<Student> studentList) {
+            int count = 1;
+            studentList.get(0).setRank(1);
+            for(int i = 1; i < studentList.size(); i++){
+                if (studentList.get(i - 1).getTotalScore() == studentList.get(i).getTotalScore()){
+                    studentList.get(i).setRank(count);
+                } else {
+                    studentList.get(i).setRank(++count);
                 }
             }
         }
-
     }
-
 }
