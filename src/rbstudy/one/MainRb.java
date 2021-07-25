@@ -74,7 +74,7 @@ public class MainRb {
         studentScoreAndRankCalculateUtil.sortStudentTotalScore(studentList);
         studentScoreAndRankCalculateUtil.insertStudentRank(studentList);
 
-        System.out.println("===============학생 총점기준 순위 리스트 v1.0===============");
+        System.out.println("===========학생 총점기준 순위 리스트 v1.0===========");
         printStudentList(studentList);
 
         Student student5 = new Student();
@@ -92,34 +92,38 @@ public class MainRb {
         studentScoreAndRankCalculateUtil.insertTotalScore(student6);
         studentList.add(student5);
         studentList.add(student6);
-        studentList.add(student6);
+        studentList.add(student5); // 공동 3명 정렬 확인하려고 1명 더 추가
+        studentList.add(student2); // 공동 5순위하려고 1명 더 추가
 
         studentScoreAndRankCalculateUtil.sortStudentTotalScore(studentList);
         studentScoreAndRankCalculateUtil.insertStudentRank(studentList);
 
-        System.out.println("===============학생 2명 추가===============");
+        System.out.println("===============학생 추가 후 재정렬===============");
         printStudentList(studentList);
 
-        List<Student> reduplicationRank = new ArrayList<>();
+        List<Student> tiedRankStudentList = new ArrayList<>();
 
         //TODO
         // 1.동점자가 3명이상일 경우 3명 출력후 다음 반복에서 다시 2명이 나오는 문제 해결
         // 2.이름순으로 내림차순 정렬
-        System.out.println("===============동점자 리스트===============");
+        System.out.println("==================동점자 리스트==================");
         for (int i = 0; i < studentList.size() - 1; i++){
             if (studentList.get(i).getRank() == studentList.get(i + 1).getRank()){
                 int j = i + 1;
-                reduplicationRank.add(studentList.get(i));
-                while (studentList.get(i).getRank() == studentList.get(j).getRank()){
-                    reduplicationRank.add(studentList.get(j));
-                    j++;
-                }
-                System.out.println("총 " + (j - 1) + "명 ");
-                for (Student student : reduplicationRank){
-                    System.out.println(student.getRank() + "순위 이름: " + student.getName()
-                        + " 총점: " + student.getTotalScore() + " 레벨: " + student.getLevel());
-                }
-                reduplicationRank.clear();
+                int tieCount = 1;
+                tiedRankStudentList.add(studentList.get(i));
+                    while (studentList.get(i).getRank() == studentList.get(j).getRank()){
+                        tiedRankStudentList.add(studentList.get(j));
+                        tieCount++;
+                        if (j == studentList.size() - 1){
+                            break;
+                        }
+                        j++;
+                    }
+                System.out.println("총 " + tieCount + "명");
+                printStudentList(tiedRankStudentList);
+                tiedRankStudentList.clear();
+                i += j - 1;
             }
         }
     }
