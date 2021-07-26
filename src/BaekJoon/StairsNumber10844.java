@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class StairsNumber10844 {
-    final static long MOD = 1000000000;
+    final static long MOD = 1_000_000_000;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

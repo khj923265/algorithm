@@ -71,8 +71,8 @@ public class MainRb {
             studentScoreAndRankCalculateUtil.insertTotalScore(student);
         }
 
-        studentScoreAndRankCalculateUtil.sortStudentTotalScore(studentList);
-        studentScoreAndRankCalculateUtil.insertStudentRank(studentList);
+        studentScoreAndRankCalculateUtil.sortTotalScore(studentList);
+        studentScoreAndRankCalculateUtil.insertRank(studentList);
 
         System.out.println("===========학생 총점기준 순위 리스트 v1.0===========");
         printStudentList(studentList);
@@ -95,32 +95,32 @@ public class MainRb {
         studentList.add(student5); // 공동 3명 정렬 확인하려고 1명 더 추가
         studentList.add(student2); // 공동 5순위하려고 1명 더 추가
 
-        studentScoreAndRankCalculateUtil.sortStudentTotalScore(studentList);
-        studentScoreAndRankCalculateUtil.insertStudentRank(studentList);
+        studentScoreAndRankCalculateUtil.sortTotalScore(studentList);
+        studentScoreAndRankCalculateUtil.insertRank(studentList);
+        studentScoreAndRankCalculateUtil.sortTiedRank(studentList);
 
         System.out.println("===============학생 추가 후 재정렬===============");
         printStudentList(studentList);
 
         List<Student> tiedRankStudentList = new ArrayList<>();
 
-        //TODO
-        // 1.동점자가 3명이상일 경우 3명 출력후 다음 반복에서 다시 2명이 나오는 문제 해결
-        // 2.이름순으로 내림차순 정렬
         System.out.println("==================동점자 리스트==================");
+        printStudentListTiedRank(studentList, tiedRankStudentList);
+    }
+
+    private static void printStudentListTiedRank(List<Student> studentList, List<Student> tiedRankStudentList) {
         for (int i = 0; i < studentList.size() - 1; i++){
             if (studentList.get(i).getRank() == studentList.get(i + 1).getRank()){
                 int j = i + 1;
-                int tieCount = 1;
                 tiedRankStudentList.add(studentList.get(i));
                     while (studentList.get(i).getRank() == studentList.get(j).getRank()){
                         tiedRankStudentList.add(studentList.get(j));
-                        tieCount++;
                         if (j == studentList.size() - 1){
                             break;
                         }
                         j++;
                     }
-                System.out.println("총 " + tieCount + "명");
+                System.out.println("총 " + tiedRankStudentList.size() + "명");
                 printStudentList(tiedRankStudentList);
                 tiedRankStudentList.clear();
                 i += j - 1;
@@ -133,6 +133,26 @@ public class MainRb {
             System.out.println(student.getRank() + "순위 이름: " + student.getName()
                 + " 총점: " + student.getTotalScore() + " 레벨: " + student.getLevel());
         }
+    }
+
+    private static int[] getSyllableIndexList(String text) {
+        int[] syllableIndexList = new int[3];
+
+        if(text.length() > 0) {
+            char charName = text.charAt(0);
+            if(charName >= 0xAC00) {
+                int uniVal = charName - 0xAC00;
+                int onsetIndex = ((uniVal - (uniVal % 28))/28)/21;
+                int nucleusIndex = (uniVal / 28) % 21;
+                int codaIndex = uniVal % 28;
+                syllableIndexList[0] = onsetIndex;
+                syllableIndexList[1] = nucleusIndex;
+                syllableIndexList[2] = codaIndex;
+                return syllableIndexList;
+            }
+        }
+
+        return syllableIndexList;
     }
 
     static class Student{
@@ -216,7 +236,7 @@ public class MainRb {
             student.setTotalScore(student.getScore() + student.getAddScore());
         }
 
-        void sortStudentTotalScore(List<Student> studentList){
+        void sortTotalScore(List<Student> studentList){
             for(int i = 1; i < studentList.size(); i++) {
                 Student targetStudent = studentList.get(i);
                 int j = i - 1;
@@ -229,14 +249,34 @@ public class MainRb {
             }
         }
 
-        void insertStudentRank(List<Student> studentList) {
+        void insertRank(List<Student> studentList) {
             int count = 1;
             studentList.get(0).setRank(1);
             for(int i = 1; i < studentList.size(); i++){
-                if (studentList.get(i - 1).getTotalScore() == studentList.get(i).getTotalScore()){
+                if (studentList.get(i).getTotalScore() == studentList.get(i - 1).getTotalScore()){
                     studentList.get(i).setRank(count);
                 } else {
                     studentList.get(i).setRank(++count);
+                }
+            }
+        }
+
+        void sortTiedRank(List<Student> studentList){
+            for(int i = 1; i < studentList.size(); i++) {
+                if (studentList.get(i).getRank() == studentList.get(i - 1).getRank()) {
+                    Student targetStudent = studentList.get(i);
+                    int j = i - 1;
+                    int[] targetSyllableIndexList = getSyllableIndexList(targetStudent.getName());
+                    int[] syllableIndexList = getSyllableIndexList(studentList.get(j).getName());
+
+                    if (targetStudent.getRank() == studentList.get(j).getRank()){
+                        while (j >= 0 && targetSyllableIndexList[0] < syllableIndexList[0]
+                        && targetStudent.getTotalScore() >= studentList.get(j).getTotalScore()) {
+                            studentList.set(j + 1, studentList.get(j));
+                            j--;
+                        }
+                        studentList.set(j + 1, targetStudent);
+                    }
                 }
             }
         }

@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class OneTwoThreeFive15990 {
 
     static int[][] dp = new int[100001][4];
-    final static int MOD = 1000000009;
+    final static int MOD = 1_000_000_009;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
