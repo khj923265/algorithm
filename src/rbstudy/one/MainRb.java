@@ -30,7 +30,7 @@ public class MainRb {
          4순위 김종신1 69 2
          *
          */
-    // TODO 소스코드 수정 후 순위가 출력된 상태에서 추가작업
+    // 소스코드 수정 후 순위가 출력된 상태에서 추가작업
     // 전학생 마구니1 score(76) level(2)
     // 전학생 바구니2 score(87) level(3)
     // 동일 점수 일 경우 이름을 기준으로 descending sort(내림차순) 해서 순위를 매김
@@ -40,6 +40,14 @@ public class MainRb {
          * 총 2명
          * 2순위 마구니 100 2
          * 2순위 바구니 100 3
+         */
+        /**
+         * 최종 피드백!!!
+         * 1. for문 안에서 studentList.size() 는 직관적이지 않고,
+         * null이 올수 있으니 따로 관리해주는 게 좋다.
+         * 2. while문 사용은 지양 (데이터 하나 삑나면 무한루프에 빠져서 CPU 점유율 작살남!)
+         * for문으로 최대한 해결하고 아니라면 재귀적으로 해결해보자
+         * 3. for문과 stream 사용의 차이점 공부해보자! for문이 더 좋을 경우도 있다!
          */
 
         List<Student> studentList = new ArrayList<>();

@@ -2,7 +2,7 @@ package rbstudy.one;
 
 import java.util.ArrayList;
 
-public class MainRb2 {
+public class MainRb_JS {
 
     public static void main(String[] args){
         // 학생 4 명이 있다.
