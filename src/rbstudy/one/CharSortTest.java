@@ -54,19 +54,20 @@ public class CharSortTest {
                 + " 총점: " + student.getTotalScore() + " 레벨: " + student.getLevel());
         }
 
-        int[] ints = getSyllableIndexList(studentList.get(1).getName());
-        System.out.println(ints[0]);
-        System.out.println(ints[1]);
+        isSyllableSort("김형준","마구니");
+
+
 
     }
 
-    static int[] getSyllableIndexList(String text) {
+    private static int[] getSyllableIndexList(String text) {
         int[] syllableIndexList = new int[3];
 
         if(text.length() > 0) {
             char charName = text.charAt(0);
             if(charName >= 0xAC00) {
                 int uniIndex = charName - 0xAC00;
+                System.out.println("uniIndex : " + uniIndex);
                 int onsetIndex = ((uniIndex - (uniIndex % 28))/28)/21;
                 int nucleusIndex = (uniIndex / 28) % 21;
                 int codaIndex = uniIndex % 28;
@@ -78,6 +79,37 @@ public class CharSortTest {
         }
 
         return syllableIndexList;
+    }
+
+    private static boolean isSyllableSort(String targetText, String text) {
+        int minTextLength = Math.min(targetText.length(), text.length());
+
+        if(minTextLength > 0) {
+            for (int i = 0; i < minTextLength; i++) {
+                char charName1 = targetText.charAt(i);
+                char charName2 = text.charAt(i);
+                if (charName1 != charName2) {
+                    int uniIndex1 = charName1 - 0xAC00;
+                    int uniIndex2 = charName2 - 0xAC00;
+
+                    int onsetIndex1 = ((uniIndex1 - (uniIndex1 % 28))/28)/21;
+                    int onsetIndex2 = ((uniIndex2 - (uniIndex2 % 28))/28)/21;
+                    if (onsetIndex1 > onsetIndex2) return false;
+                    if (onsetIndex1 < onsetIndex2) return true;
+
+                    int nucleusIndex1 = (uniIndex1 / 28) % 21;
+                    int nucleusIndex2 = (uniIndex2 / 28) % 21;
+                    if (nucleusIndex1 > nucleusIndex2) return false;
+                    if (nucleusIndex1 < nucleusIndex2) return true;
+
+                    int codaIndex1 = uniIndex1 % 28;
+                    int codaIndex2 = uniIndex2 % 28;
+                    if (codaIndex1 > codaIndex2) return false;
+                    if (codaIndex1 < codaIndex2) return true;
+                }
+            }
+        }
+        return true;
     }
 
 }
