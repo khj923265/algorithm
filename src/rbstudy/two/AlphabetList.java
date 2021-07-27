@@ -14,17 +14,50 @@ public class AlphabetList {
         //남은 결과
         //Z
 
-        // 이중배열쓰면 될듯?
-        // 남은 결과는 삭제로 하는게 낫겠다
-
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String[][] board = new String[6][6];
 
         String[] alphabetList = alphabet.split("");
         int alphabetListLength = alphabetList.length;
+        int v = 1;
+        int h = 1;
+        board[v][h] = alphabetList[0];
 
-        printResult(alphabetList, alphabetListLength);
+        for (int i = 1; i < alphabetListLength; i++) {
+            if (h < 5 && board[v][h + 1] == null) {
+                for (int j = i; h < 5 && board[v][h + 1] == null; j++) {
+                    board[v][h + 1] = alphabetList[j];
+                    h++;
+                    i = j;
+                }
+            } else if (v < 5 && board[v + 1][h] == null) {
+                for (int j = i; v < 5 && board[v + 1][h] == null; j++) {
+                    board[v + 1][h] = alphabetList[j];
+                    v++;
+                    i = j;
+                }
+            } else if (h > 1 && board[v][h - 1] == null) {
+                for (int j = i; h > 1 && board[v][h - 1] == null; j++) {
+                    board[v][h - 1] = alphabetList[j];
+                    h--;
+                    i = j;
+                }
+            } else if (v > 1 && board[v - 1][h] == null) {
+                for (int j = i; v > 1 && board[v - 1][h] == null; j++) {
+                    board[v - 1][h] = alphabetList[j];
+                    v--;
+                    i = j;
+                }
+            }
+        }
 
-        printRemainResult(alphabetList, alphabetListLength);
+        for (int i = 1; i < 6; i++) {
+            for (int j = 1; j < 6; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+
+        }
 
     }
 
