@@ -48,6 +48,7 @@ public class MainRb {
          * 2. while문 사용은 지양 (데이터 하나 삑나면 무한루프에 빠져서 CPU 점유율 작살남!)
          * for문으로 최대한 해결하고 아니라면 재귀적으로 해결해보자
          * 3. for문과 stream 사용의 차이점 공부해보자! for문이 더 좋을 경우도 있다!
+         * 4. 스켈레톤 코드가 무엇인지 찾아보자!!
          */
 
         List<Student> studentList = new ArrayList<>();
