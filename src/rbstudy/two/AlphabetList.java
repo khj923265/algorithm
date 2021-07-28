@@ -34,8 +34,8 @@ public class AlphabetList {
 
     private static void insertAlphabetOnBoard(List<String> alphabetList, String[][] boardList){
         int alphabetListLength = alphabetList.size() - 1;
-        final int zero = 0;
         int boardListLength = boardList.length - 1;
+        int zero = 0;
         int row = 1;
         int col = 1;
         boardList[row][col] = alphabetList.get(zero);
