@@ -6,15 +6,15 @@ public class AlphabetList {
 
     public static void main(String[] args) {
         // 규칙은 자유 알아서 출력만 맞으면 됨
-        //출력 결과
-        //A B  C D E
-        //P Q  R S F
-        //O X  Y T G
-        //N W V U H
-        //M L  K J  I
+        // 출력 결과
+        // A B C D E
+        // P Q R S F
+        // O X Y T G
+        // N W V U H
+        // M L K J I
         // 5 x 5
-        //남은 결과
-        //Z
+        // 남은 결과
+        // Z
 
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         
@@ -35,34 +35,34 @@ public class AlphabetList {
     private static void insertAlphabetOnBoard(List<String> alphabetList, String[][] boardList){
         int alphabetListLength = alphabetList.size() - 1;
         final int zero = 0;
-        int v = 1;
-        int h = 1;
-        boardList[v][h] = alphabetList.get(zero);
+        int row = 1;
+        int column = 1;
+        boardList[row][column] = alphabetList.get(zero);
         alphabetList.remove(zero);
 
         for (int i = 1; i < alphabetListLength; i++) {
-            for (int j = i; h < 5 && boardList[v][h + 1] == null; j++) {
-                boardList[v][h + 1] = alphabetList.get(zero);
+            for (int j = i; column < 5 && boardList[row][column + 1] == null; j++) {
+                boardList[row][column + 1] = alphabetList.get(zero);
                 alphabetList.remove(zero);
-                h++;
+                column++;
                 i = j;
             }
-            for (int j = i; v < 5 && boardList[v + 1][h] == null; j++) {
-                boardList[v + 1][h] = alphabetList.get(zero);
+            for (int j = i; row < 5 && boardList[row + 1][column] == null; j++) {
+                boardList[row + 1][column] = alphabetList.get(zero);
                 alphabetList.remove(zero);
-                v++;
+                row++;
                 i = j;
             }
-            for (int j = i; h > 1 && boardList[v][h - 1] == null; j++) {
-                boardList[v][h - 1] = alphabetList.get(zero);
+            for (int j = i; column > 1 && boardList[row][column - 1] == null; j++) {
+                boardList[row][column - 1] = alphabetList.get(zero);
                 alphabetList.remove(zero);
-                h--;
+                column--;
                 i = j;
             }
-            for (int j = i; v > 1 && boardList[v - 1][h] == null; j++) {
-                boardList[v - 1][h] = alphabetList.get(zero);
+            for (int j = i; row > 1 && boardList[row - 1][column] == null; j++) {
+                boardList[row - 1][column] = alphabetList.get(zero);
                 alphabetList.remove(zero);
-                v--;
+                row--;
                 i = j;
             }
         }
