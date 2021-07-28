@@ -35,32 +35,33 @@ public class AlphabetList {
     private static void insertAlphabetOnBoard(List<String> alphabetList, String[][] boardList){
         int alphabetListLength = alphabetList.size() - 1;
         final int zero = 0;
+        int boardListLength = boardList.length - 1;
         int row = 1;
-        int column = 1;
-        boardList[row][column] = alphabetList.get(zero);
+        int col = 1;
+        boardList[row][col] = alphabetList.get(zero);
         alphabetList.remove(zero);
 
         for (int i = 1; i < alphabetListLength; i++) {
-            for (int j = i; column < 5 && boardList[row][column + 1] == null; j++) {
-                boardList[row][column + 1] = alphabetList.get(zero);
+            for (int j = i; col < boardListLength && boardList[row][col + 1] == null; j++) {
+                boardList[row][col + 1] = alphabetList.get(zero);
                 alphabetList.remove(zero);
-                column++;
+                col++;
                 i = j;
             }
-            for (int j = i; row < 5 && boardList[row + 1][column] == null; j++) {
-                boardList[row + 1][column] = alphabetList.get(zero);
+            for (int j = i; row < boardListLength && boardList[row + 1][col] == null; j++) {
+                boardList[row + 1][col] = alphabetList.get(zero);
                 alphabetList.remove(zero);
                 row++;
                 i = j;
             }
-            for (int j = i; column > 1 && boardList[row][column - 1] == null; j++) {
-                boardList[row][column - 1] = alphabetList.get(zero);
+            for (int j = i; col > 1 && boardList[row][col - 1] == null; j++) {
+                boardList[row][col - 1] = alphabetList.get(zero);
                 alphabetList.remove(zero);
-                column--;
+                col--;
                 i = j;
             }
-            for (int j = i; row > 1 && boardList[row - 1][column] == null; j++) {
-                boardList[row - 1][column] = alphabetList.get(zero);
+            for (int j = i; row > 1 && boardList[row - 1][col] == null; j++) {
+                boardList[row - 1][col] = alphabetList.get(zero);
                 alphabetList.remove(zero);
                 row--;
                 i = j;
