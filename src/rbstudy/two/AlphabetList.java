@@ -1,6 +1,9 @@
 package rbstudy.two;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class AlphabetList {
 
