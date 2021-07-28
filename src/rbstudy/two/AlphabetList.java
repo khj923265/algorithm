@@ -1,5 +1,7 @@
 package rbstudy.two;
 
+import java.util.*;
+
 public class AlphabetList {
 
     public static void main(String[] args) {
@@ -15,81 +17,73 @@ public class AlphabetList {
         //Z
 
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String[][] board = new String[6][6];
+        
+        String[][] boardList = new String[6][6];
+        String[] alphabetSplitList = alphabet.split("");
+        List<String> alphabetList = new ArrayList<>(Arrays.asList(alphabetSplitList));
 
-        String[] alphabetList = alphabet.split("");
-        int alphabetListLength = alphabetList.length;
+        insertAlphabetOnBoard(alphabetList, boardList);
+
+        System.out.println("= 결과 출력 =");
+        printResult(boardList);
+
+        System.out.println("= 남은 결과 =");
+        printRemainResult(alphabetList);
+
+    }
+
+    private static void insertAlphabetOnBoard(List<String> alphabetList, String[][] boardList){
+        int alphabetListLength = alphabetList.size() - 1;
+        final int zero = 0;
         int v = 1;
         int h = 1;
-        board[v][h] = alphabetList[0];
+        boardList[v][h] = alphabetList.get(zero);
+        alphabetList.remove(zero);
 
         for (int i = 1; i < alphabetListLength; i++) {
-            if (h < 5 && board[v][h + 1] == null) {
-                for (int j = i; h < 5 && board[v][h + 1] == null; j++) {
-                    board[v][h + 1] = alphabetList[j];
-                    h++;
-                    i = j;
-                }
-            } else if (v < 5 && board[v + 1][h] == null) {
-                for (int j = i; v < 5 && board[v + 1][h] == null; j++) {
-                    board[v + 1][h] = alphabetList[j];
-                    v++;
-                    i = j;
-                }
-            } else if (h > 1 && board[v][h - 1] == null) {
-                for (int j = i; h > 1 && board[v][h - 1] == null; j++) {
-                    board[v][h - 1] = alphabetList[j];
-                    h--;
-                    i = j;
-                }
-            } else if (v > 1 && board[v - 1][h] == null) {
-                for (int j = i; v > 1 && board[v - 1][h] == null; j++) {
-                    board[v - 1][h] = alphabetList[j];
-                    v--;
-                    i = j;
-                }
+            for (int j = i; h < 5 && boardList[v][h + 1] == null; j++) {
+                boardList[v][h + 1] = alphabetList.get(zero);
+                alphabetList.remove(zero);
+                h++;
+                i = j;
+            }
+            for (int j = i; v < 5 && boardList[v + 1][h] == null; j++) {
+                boardList[v + 1][h] = alphabetList.get(zero);
+                alphabetList.remove(zero);
+                v++;
+                i = j;
+            }
+            for (int j = i; h > 1 && boardList[v][h - 1] == null; j++) {
+                boardList[v][h - 1] = alphabetList.get(zero);
+                alphabetList.remove(zero);
+                h--;
+                i = j;
+            }
+            for (int j = i; v > 1 && boardList[v - 1][h] == null; j++) {
+                boardList[v - 1][h] = alphabetList.get(zero);
+                alphabetList.remove(zero);
+                v--;
+                i = j;
             }
         }
+    }
 
+    private static void printResult(String[][] boardList){
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
-                System.out.print(board[i][j] + " ");
-            }
-            System.out.println();
-
-        }
-
-    }
-
-    private static void printResult(String[] alphabetList, int alphabetListLength){
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < alphabetListLength; i++) {
-            if ((i + 1)%5 == 0) {
-                for (int j = i - 4; j < i + 1;j++) {
-                    if ((j + 1)%5 != 0) {
-                        stringBuilder.append(alphabetList[j]).append(" ");
-                    } else {
-                        stringBuilder.append(alphabetList[j]).append("\n");
-                    }
+                if (j < 5) {
+                    System.out.print(boardList[i][j] + " ");
+                } else {
+                    System.out.print(boardList[i][j]);
                 }
             }
+            System.out.println();
         }
-        System.out.println("출력 결과");
-        System.out.println(stringBuilder);
     }
 
-    private static  void printRemainResult(String[] alphabetList, int alphabetListLength){
-        StringBuilder stringBuilderRemain = new StringBuilder();
-
-        if (alphabetListLength%5 != 0) {
-            int remainderLength = alphabetListLength % 5;
-            int remainderIndex = alphabetListLength - remainderLength;
-            for (int i = 0; i < remainderLength; i++) {
-                stringBuilderRemain.append(alphabetList[remainderIndex + i]).append("\n");
-            }
+    private static void printRemainResult(List<String> alphabetList){
+        for (String alphabet : alphabetList) {
+            System.out.print(alphabet + " ");
         }
-        System.out.println("남은 결과");
-        System.out.println(stringBuilderRemain);
     }
 }
