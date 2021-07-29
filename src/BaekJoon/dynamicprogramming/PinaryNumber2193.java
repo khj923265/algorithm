@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class pinaryNumber2193 {
+public class PinaryNumber2193 {
     static long[][] dp = new long[91][2];
 
     public static void main(String[] args) throws IOException {
