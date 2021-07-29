@@ -1,7 +1,5 @@
 package rbstudy.two;
 
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,6 +17,12 @@ public class AlphabetList {
         // 5 x 5
         // 남은 결과
         // Z
+
+        // 알파벳 리스트크기만큼 반복
+        // 오른쪽이 비어있으면 안빌때까지 이동
+        // 아래가 비어있으면 안빌때까지 이동
+        // 위가 비어있으면 안빌때까지 이동
+        // 왼쪽이 비어 있으면 안빌때까지 이동
 
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         
@@ -45,6 +49,9 @@ public class AlphabetList {
         boardList[row][col] = alphabetList.get(zero);
         alphabetList.remove(zero);
 
+        // null 체크 말고 다른방법을 찾지 못했습니다.
+        // 널체크 때문에 Optional 을 사용하는건 안좋은 방법인것 같고 StringUtils는 라이브러리를 받아야해서 사용을 안했습니다.
+        // 2중배열 전체에 공백넣고 " ".equals() 사용은 n2발생이라 뭐가 더 나은지 모르겠습니다.
         for (int i = 1; i < alphabetListLength; i++) {
             for (int j = i; col < boardListLength && boardList[row][col + 1] == null; j++) {
                 boardList[row][col + 1] = alphabetList.get(zero);
@@ -88,7 +95,7 @@ public class AlphabetList {
 
     private static void printRemainResult(List<String> alphabetList){
         for (String alphabet : alphabetList) {
-            System.out.print(alphabet + " ");
+            System.out.print(alphabet);
         }
     }
 }
