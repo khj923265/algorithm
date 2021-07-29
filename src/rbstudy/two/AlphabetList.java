@@ -3,6 +3,7 @@ package rbstudy.two;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class AlphabetList {
@@ -23,7 +24,7 @@ public class AlphabetList {
         
         String[][] boardList = new String[6][6];
         String[] alphabetSplitList = alphabet.split("");
-        List<String> alphabetList = new ArrayList<>(Arrays.asList(alphabetSplitList));
+        List<String> alphabetList = new LinkedList<>(Arrays.asList(alphabetSplitList));
 
         insertAlphabetOnBoard(alphabetList, boardList);
 
