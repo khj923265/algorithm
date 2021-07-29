@@ -1,4 +1,4 @@
-package BaekJoon;
+package BaekJoon.dynamicprogramming;
 
 public class CallByValue {
     public static void swap(Integer x, Integer y) {
