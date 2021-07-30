@@ -36,5 +36,7 @@ public class PinaryNumber2193 {
 
         int n = Integer.parseInt(br.readLine());
         System.out.println(dp[n][0] + dp[n][1]);
+
+        br.close();
     }
 }

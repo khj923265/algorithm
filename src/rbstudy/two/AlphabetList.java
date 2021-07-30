@@ -43,7 +43,7 @@ public class AlphabetList {
     private static void insertAlphabetOnBoard(List<String> alphabetList, String[][] boardList){
         int alphabetListLength = alphabetList.size() - 1;
         int boardListLength = boardList.length - 1;
-        int zero = 0;
+        final int zero = 0;
         int row = 1;
         int col = 1;
         boardList[row][col] = alphabetList.get(zero);
@@ -51,7 +51,6 @@ public class AlphabetList {
 
         // null 체크 말고 다른방법을 찾지 못했습니다.
         // 널체크 때문에 Optional 을 사용하는건 안좋은 방법인것 같고 StringUtils는 라이브러리를 받아야해서 사용을 안했습니다.
-        // 2중배열 전체에 공백넣고 " ".equals() 사용은 n2발생이라 뭐가 더 나은지 모르겠습니다.
         for (int i = 1; i < alphabetListLength; i++) {
             for (int j = i; col < boardListLength && boardList[row][col + 1] == null; j++) {
                 boardList[row][col + 1] = alphabetList.get(zero);
