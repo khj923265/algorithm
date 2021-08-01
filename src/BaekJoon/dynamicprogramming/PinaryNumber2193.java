@@ -23,6 +23,9 @@ public class PinaryNumber2193 {
         // dp[n][0] = dp[n - 1][0] + dp[n - 2][0]
         // dp[n][1] = dp[n - 1][1] + dp[n - 2][1]
         // dp[n] = dp[n][0] + dp[n][1]
+        /**
+         * 0 일 경우 1 일 경우 나눌 필요없이 dp[n] = dp[n - 1] + dp[n - 2]
+         */
 
         dp[1][1] = 1;
         dp[2][0] = 1;
