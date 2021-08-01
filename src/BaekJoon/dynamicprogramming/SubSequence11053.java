@@ -13,6 +13,11 @@ public class SubSequence11053 {
         // dp[], seq[] 배열 2개를 사용
         // 나중 이분탐색공부시 이분탐색으로도 풀이 가능
 
+        // 처음엔 단순 카운트로 생각해보고 고쳐보자 생각함
+        // 10 30 10 50 20 40
+        // 1  2  2  3  3  4   - > 여기서 다음으로 진도를 못나가서 정답확인
+        // 1  2  1  3  2  3  이런식으로 전값보다 작으면 새롭게 카운트 하는 방법
+
         int N = Integer.parseInt(br.readLine());
         int[] seq = new int[N];
         int[] dp = new int[N];
