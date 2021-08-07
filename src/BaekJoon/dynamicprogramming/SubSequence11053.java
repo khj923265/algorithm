@@ -3,6 +3,8 @@ package BaekJoon.dynamicprogramming;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class SubSequence11053 {
@@ -37,28 +39,42 @@ public class SubSequence11053 {
         // 이분탐색으로 해결시 n log n 이 가능함
         // 이분탐색 : 반으로 나눠가며 해결하는 방법 보통 이분탐색은 log n 으로 알려져있음
 
+        // List 로 다시 풀이
+        // 첫번째 값을 리스트에 넣고 리스트 끝값과 비교 크면 그냥 넣고
+        // 작으면 자신보다 작은값이 나올 때 까지 비교 후 그 위치에 삽입
+
         int N = Integer.parseInt(br.readLine());
-        int[] arr = new int[N];
-        int[] dp = new int[N];
-        int max = -1;
+        List<Integer> dpList = new ArrayList<>();
+        dpList.add(0); // 0 번째에 0 삽입
+        StringBuilder sb  = new StringBuilder();
 
         // split 사용보다 Tokenizer 사용이 조금 더 빠르다고 함
         StringTokenizer st = new StringTokenizer(br.readLine()," ");
 
         for(int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
+            int value = Integer.parseInt(st.nextToken());
 
-        for(int i = 0; i < N; i++) {
-            dp[i] = 1;
-            for(int j = 0; j < i; j++) {
-                if(arr[j] < arr[i] && dp[i] < dp[j] + 1) {
-                    dp[i] = dp[j] + 1;
+            if (value > dpList.get(dpList.size() - 1)) {
+                dpList.add(value);
+            } else {
+                int left = 0;
+                int right = dpList.size() - 1;
+
+                while(left < right){
+                    int mid = (left + right) / 2;
+                    if(dpList.get(mid) >= value){
+                        right = mid;
+                    }else{
+                        left = mid + 1;
+                    }
                 }
+                dpList.set(right, value);
             }
-            if (max < dp[i]) max = dp[i];
         }
+        System.out.println(dpList.size() - 1);
 
-        System.out.println(max);
+        for (int i = 1; i < dpList.size(); i++) {
+            System.out.print(dpList.get(i) + " ");
+        }
     }
 }
