@@ -62,7 +62,7 @@ public class SubSequence14002 {
         System.out.println(sb);
 
         // 2. stream 으로 정렬 후 출력하는 방법 180ms
-        // stream 사용해서 정렬 후 출력하는거나 그냥 끝부분부터 출력하는거나 비슷함(생각보다 차이가 없음)
+        // stream 사용해서 정렬 후 출력하는거나 그냥 끝부분부터 출력하는거나 비슷함
         resultList.stream()
             .sorted(Integer::compareTo)
             .forEach(e -> System.out.print(e + " "));
