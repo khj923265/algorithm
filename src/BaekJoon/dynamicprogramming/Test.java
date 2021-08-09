@@ -1,5 +1,10 @@
 package BaekJoon.dynamicprogramming;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 public class Test {
 
     public static void main(String[] args) {
@@ -7,8 +12,12 @@ public class Test {
 
 //        revers(string);
 
-        int result = factorial(5);
-        System.out.println(result);
+//        int result = factorial(5);
+//        System.out.println(result);
+
+        List<String> strings = Arrays.asList("a","b","c");
+        strings.add("f");
+        System.out.println(strings);
     }
 
     public static void revers(char[] string) {
