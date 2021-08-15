@@ -8,6 +8,7 @@ public class SumOfSquareNumber1699 {
 
     public static void main(String[] args) throws IOException {
         /**
+         * 제곱수의 합
          * 어떤 자연수 N은 그보다 작거나 같은 제곱수들의 합으로 나타낼 수 있다. 예를 들어 11=3^+1^+1^(3개 항)이다.
          * 주어진 자연수 N을 이렇게 제곱수들의 합으로 표현할 때에 그 항의 최소개수를 구하는 프로그램을 작성하시오.
          */
@@ -20,6 +21,15 @@ public class SumOfSquareNumber1699 {
         // dp[7] = 2^ + 1^ + 1^ + 1^
         // dp[8] = 2^ + 2^
         // dp[9] = 3^
+
+        // dp[9] = 1^ + 2^ + 2^
+        // dp[9] = 2^ + 2^ + 1^
+        // dp[9] = 3^
+
+        // dp[12] = 1^ + dp[11]
+        // dp[12] = 2^ + dp[8]
+        // dp[12] = 3^ + dp[3]
+
 
         // 점화식 : Math.min(dp[i], dp[i - j*j] + 1)
         // ex) dp[12] 일 경우 dp[11] + 1, dp[8] + 1, dp[3] + 1, dp[1] * 12
