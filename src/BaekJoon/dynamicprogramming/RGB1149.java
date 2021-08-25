@@ -28,9 +28,7 @@ public class RGB1149 {
         // cost[1][3] + cost[2][1]
         // cost[1][3] + cost[2][2]
         // 그 다음 N = 3일 경우
-        // dp[2][1] += cost[3][2] or cost[3][3]
-        // dp[2][2] += cost[3][1] or cost[3][3]
-        // dp[2][3] += cost[3][1] or cost[3][2]
+        // dp[3][1] += min ( dp[2][2], dp[2][3] )
 
         int N = Integer.parseInt(br.readLine());
         int[][] cost = new int[N + 1][4];
