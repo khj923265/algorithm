@@ -27,6 +27,7 @@ public class Ascent11057 {
         // dp[3] = 220
         // 55 + 45 + 36 + 28 + 21 + 15 + 10 + 6 + 3 + 1
 
+
         long[][] dp = new long[N + 1][11];
 
         for (int i = 0; i < 10; i++) {
