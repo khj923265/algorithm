@@ -9,7 +9,6 @@ public class RGB1149 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         /**
          * RGB 문제
          * 1번 집 부터 N번 집까지 있고 그집을 빨강, 초록, 파랑 색으로 칠할 수 있는 비용이 주어짐
@@ -52,3 +51,4 @@ public class RGB1149 {
     }
 
 }
+
