@@ -11,6 +11,9 @@ public class SubSequence11053 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        /**
+         * 가장 긴 증가하는 수열
+         */
         // 정답보고 이해함
         // dp[], arr[] 배열 2개를 사용
         // 나중 이분탐색공부시 이분탐색으로도 풀이 가능 ( 시간복잡도가 n^2 에서 n log n  으로 줄어들 수 있음 )
@@ -46,7 +49,6 @@ public class SubSequence11053 {
         int N = Integer.parseInt(br.readLine());
         List<Integer> dpList = new ArrayList<>();
         dpList.add(0); // 0 번째에 0 삽입
-        StringBuilder sb  = new StringBuilder();
 
         // split 사용보다 Tokenizer 사용이 조금 더 빠르다고 함
         StringTokenizer st = new StringTokenizer(br.readLine()," ");
@@ -71,6 +73,7 @@ public class SubSequence11053 {
                 dpList.set(right, value);
             }
         }
+        System.out.println(dpList);
         System.out.println(dpList.size() - 1);
 
         for (int i = 1; i < dpList.size(); i++) {
