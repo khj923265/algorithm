@@ -14,6 +14,10 @@ public class SubSequence11722 {
          * 가장 긴 감소하는 수열
          */
 
+        // 가장 긴 증가하는 수열에서 반대로 해결
+        // 10 30 10 20 20 10 7
+        // 30 20 10
+        // 30 20 10 5
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         List<Integer> dpList = new ArrayList<>();
