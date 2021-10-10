@@ -4,6 +4,8 @@ public class ConsecutiveSum1912 {
 
     public static void main(String[] args) throws Exception {
         /**
+         * 연속합 문제
+         *
          * System.in.read() 방식으로 변경
          */
         // 한 바이트씩 입력받기 때문에 한글은 X

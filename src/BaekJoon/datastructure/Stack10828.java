@@ -1,4 +1,4 @@
-package BaekJoon.dataStructure;
+package BaekJoon.datastructure;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
