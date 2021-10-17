@@ -14,7 +14,7 @@ public class TilingThree2133 {
         // N = 4
         // 11 = 9 + 2
         // N = 6
-        // 41 -> 33 + 6 + 2
+        // 41 -> 27 + dp[N-4] * 4 + 2(새로운 유형)
 
 
         int N = read();

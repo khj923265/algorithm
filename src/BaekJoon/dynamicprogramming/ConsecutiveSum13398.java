@@ -1,8 +1,5 @@
 package BaekJoon.dynamicprogramming;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ConsecutiveSum13398 {
 
     public static void main(String[] args) throws Exception {
@@ -13,11 +10,16 @@ public class ConsecutiveSum13398 {
         // 배열중 음수인 부분을 타겟으로 잡고 dp를 저장하면 되지않을 까 해서 풀었지만 메모리초과 뜸
         // ex)
         // 10 -4 3 1 5 6 -35 12 21 -1
+        // -1 21 12 -35 6 5 1 3 -4 10
+        // 1 2 3 4 5 6 7 8 9 10
+
         // -4 를 기준으로 10 ~ 6 까지
         // -35 를 기준으로 10 ~ 21 까지 했다가 뒷부분에서 음수를 더하고 쭉 갈수도 있어서 끝까지 찾게함
 
         // 정답확인
         // dp를 거꾸로도 저장해서 앞/뒤 dp를 저장하는 방법이 있었음
+        // [10, 6, 9 , 10 ,15 ~]
+        // [                  21 ,-1]
 
         int N = read();
 
