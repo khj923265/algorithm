@@ -9,34 +9,34 @@ public class YearCalculation1476 {
          *  이 3개의 입력값으로 지구년도로 계산해서 출력하기
          */
 
-        int EarthYear = read();
-        int SunYear = read();
-        int MoonYear = read();
-        int RealYear = 1;
+        int earthYear = read();
+        int sunYear = read();
+        int moonYear = read();
+        int realYear = 1;
 
-        int EarthYearCount = 0;
-        int SunYearCount = 0;
-        int MoonYearCount = 0;
+        int earthYearCount = 0;
+        int sunYearCount = 0;
+        int moonYearCount = 0;
 
         boolean isEnd = true;
 
         while(isEnd) {
-            ++EarthYearCount;
-            ++SunYearCount;
-            ++MoonYearCount;
+            ++earthYearCount;
+            ++sunYearCount;
+            ++moonYearCount;
 
-            if (EarthYearCount > 15) EarthYearCount = 1;
-            if (SunYearCount > 28) SunYearCount = 1;
-            if (MoonYearCount > 19) MoonYearCount = 1;
+            if (earthYearCount > 15) earthYearCount = 1;
+            if (sunYearCount > 28) sunYearCount = 1;
+            if (moonYearCount > 19) moonYearCount = 1;
 
-            if (EarthYear == EarthYearCount && SunYear == SunYearCount && MoonYear == MoonYearCount) {
+            if (earthYear == earthYearCount && sunYear == sunYearCount && moonYear == moonYearCount) {
                 isEnd = false;
             } else {
-                ++RealYear;
+                ++realYear;
             }
         }
 
-        System.out.println(RealYear);
+        System.out.println(realYear);
 
     }
 
