@@ -12,6 +12,7 @@ public class RemoteControl1107 {
          *  채널 N으로 이동하기 위해서 버튼을 최소 몇 번 눌러야하는지 구하기.
          */
 
+        //TODO 10/24 같이 풀기
         int currentChannel = 100;
         int targetChannel = read();
         int brokenButtonCount = read();
