@@ -9,18 +9,16 @@ public class Max2562 {
          *  이들 중 최댓값을 찾고 그 최댓값이 몇 번째 수인지를 구하는 프로그램을 작성하시오.
          */
 
-        //TODO 런타임에러 해결해야함
-
         int max = 0;
         int index = 0;
         for (int i = 0; i < 9; i++) {
             int a = read();
             if (max < a) {
                 max = a;
-                index = i;
+                index = i + 1;
             }
         }
-        System.out.println(max + "\n" + index + 1);
+        System.out.println(max + "\n" + index);
     }
 
     private static int read() throws Exception {
