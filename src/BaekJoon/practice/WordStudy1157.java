@@ -1,4 +1,4 @@
-package BaekJoon.bruteforce;
+package BaekJoon.practice;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,6 +13,9 @@ public class WordStudy1157 {
          *  영어로 된 단어를 입력받고 중복된 알파벳이 가장 많은 개수를 출력하기.
          *  가장 많은 개수가 같은게 있으면 ? 를 출력
          */
+
+        // 메모리를 좀 많이 먹음 이것저것 너무 복잡하게 푼듯...
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String word = br.readLine().toUpperCase(Locale.ROOT);
         char[] charArr = word.toCharArray();

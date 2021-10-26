@@ -1,4 +1,4 @@
-package BaekJoon.bruteforce;
+package BaekJoon.practice;
 
 public class DecompositionSum2231 {
 

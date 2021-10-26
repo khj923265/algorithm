@@ -1,4 +1,4 @@
-package BaekJoon.bruteforce;
+package BaekJoon.practice;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
