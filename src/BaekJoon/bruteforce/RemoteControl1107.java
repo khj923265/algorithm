@@ -1,6 +1,7 @@
 package BaekJoon.bruteforce;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RemoteControl1107 {
@@ -18,20 +19,107 @@ public class RemoteControl1107 {
         int brokenButtonCount = read();
         List<Integer> brokenNumberList = new ArrayList<>();
         List<Integer> targetChannelList = new ArrayList<>();
+        List<Integer> resultList = new ArrayList<>();
+        int resultCount = 0;
+
+        if (96 < targetChannel && targetChannel < 104) {
+            if (targetChannel < 100) {
+                System.out.println(100 - targetChannel);
+                return;
+            } else if (targetChannel > 100) {
+                System.out.println(targetChannel - 100);
+                return;
+            }else {
+                System.out.println(0);
+                return;
+            }
+        }
 
         // 리스트에 고장난 번호 담기
         for (int i = 0; i < brokenButtonCount; i++) {
             brokenNumberList.add(read());
         }
 
+        int targetChannelCopy = targetChannel;
         // 리스트에 타겟채널
-        while(targetChannel > 0) {
-            targetChannelList.add(targetChannel%10);
-            targetChannel /= 10;
+        while(targetChannelCopy > 0) {
+            targetChannelList.add(targetChannelCopy%10);
+            targetChannelCopy /= 10;
         }
-        System.out.println(brokenNumberList);
-        System.out.println(targetChannelList);
+        Collections.reverse(targetChannelList);
 
+        if (brokenButtonCount == 0) {
+            System.out.println(targetChannelList.size());
+            return;
+        }
+
+        resultCount = getResultCountBySelectNumber(brokenNumberList, targetChannelList, resultList, resultCount);
+
+        int result = 0;
+        for (int i = 0; i < resultList.size(); i++) {
+            result += resultList.get(i);
+            if (!(i == resultList.size() - 1)) {
+                result *= 10;
+            }
+        }
+
+        if (result < targetChannel) {
+            while (result < targetChannel) {
+                ++result;
+                ++resultCount;
+            }
+        } else if (result > targetChannel){
+            while (result > targetChannel) {
+                --result;
+                ++resultCount;
+            }
+        }
+        System.out.println(resultCount);
+
+    }
+
+    private static int getResultCountBySelectNumber(List<Integer> brokenNumberList,
+        List<Integer> targetChannelList, List<Integer> resultList, int resultCount) {
+        int channelDigit = targetChannelList.size();
+
+        for (int i = 0; i < channelDigit; i++) {
+            if (brokenNumberList.contains(targetChannelList.get(i))) {
+                int highIndex = getHighIndex(brokenNumberList, targetChannelList, i);
+                int lowIndex = getLowIndex(brokenNumberList, targetChannelList, i);
+                if (!(highIndex == 100 && lowIndex == -100)) {
+                    if (highIndex - targetChannelList.get(i) < targetChannelList.get(i) - lowIndex) {
+                        resultCount = channelDigit;
+                        resultList.add(highIndex);
+                    } else {
+                        resultCount = channelDigit;
+                        resultList.add(lowIndex);
+                    }
+                }
+            } else {
+                resultList.add(targetChannelList.get(i));
+            }
+        }
+        return resultCount;
+    }
+
+    private static int getHighIndex(List<Integer> brokenNumberList, List<Integer> targetChannelList, int i) {
+        int forIndex = 10 - targetChannelList.get(i);
+        for (int j = 1; j < forIndex; j++) {
+            if (!brokenNumberList.contains(targetChannelList.get(i) + j)) {
+                return targetChannelList.get(i) + j;
+            }
+        }
+        return 100;
+    }
+
+    private static int getLowIndex(List<Integer> brokenNumberList, List<Integer> targetChannelList, int i) {
+        int forIndex = targetChannelList.get(i) + 1;
+        for (int j = 1; j < forIndex; j++) {
+            if (!brokenNumberList.contains(targetChannelList.get(i) - j)) {
+                return targetChannelList.get(i) + j;
+            }
+        }
+        return -100;
     }
 
     private static int read() throws Exception {
