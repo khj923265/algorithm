@@ -14,6 +14,7 @@ public class NapaCabbage1012 {
          *  DFS 와 BFS 문제
          */
 
+        //TODO 해결중
         int t = read();
         StringBuilder sb = new StringBuilder();
 
@@ -49,10 +50,10 @@ public class NapaCabbage1012 {
     private static void dfs(int n, int m) {
         if (n < N && m < M) {
             if (!check[n][m] && list[n][m] == 1) {
+                check[n][m] = true;
                 dfs(n,m + 1);
                 dfs(n + 1, m);
             }
-            check[n][m] = true;
         }
     }
 

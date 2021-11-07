@@ -7,6 +7,10 @@ public class Virus2606 {
     private static boolean[] check;
 
     public static void main(String[] args) throws Exception {
+        /**
+         *  바이러스 문제
+         */
+
         comCount = read();
         int testCase = read();
 
