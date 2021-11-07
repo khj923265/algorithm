@@ -14,7 +14,12 @@ public class NapaCabbage1012 {
          *  DFS 와 BFS 문제
          */
 
-        //TODO 해결중
+        // 처음엔 오른쪽이랑 아래만 탐색하면 되는거 아닌가 했는데
+        // 0 1 1 0
+        // 1 1 1 1
+        // 이런식일 경우 list[1][0] 에 있는 값을 다시탐색하기때문에 카운트가 추가되어서 문제가 생김
+        // 그래서 위, 아래, 좌, 우 전부 탐색해줘야함
+
         int t = read();
         StringBuilder sb = new StringBuilder();
 
@@ -53,6 +58,12 @@ public class NapaCabbage1012 {
                 check[n][m] = true;
                 dfs(n,m + 1);
                 dfs(n + 1, m);
+                if (0 < n) {
+                    dfs(n - 1, m);
+                }
+                if (0 < m) {
+                    dfs(n, m - 1);
+                }
             }
         }
     }
