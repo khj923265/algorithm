@@ -1,5 +1,8 @@
 package BaekJoon.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hacking1325 {
     private static int N;
     private static int M;
@@ -10,13 +13,17 @@ public class Hacking1325 {
 
 
     public static void main(String[] args) throws Exception {
+        /**
+         * 효율적인 해킹 문제
+         * 메모리부족
+         */
         StringBuilder sb = new StringBuilder();
 
         N = read();
         M = read();
 
         list = new int[N + 1][N + 1];
-        visit = new boolean[N + 1];
+        List<Integer> countList = new ArrayList<>();
         maxCount = -1;
 
         while (M --> 0) {
@@ -28,13 +35,17 @@ public class Hacking1325 {
 
         for (int i = 1; i <= N; i++) {
             count = 0;
+            visit = new boolean[N + 1];
             dfs(i);
             if (maxCount < count) {
-                sb = new StringBuilder();
-                sb.append(i);
                 maxCount = count;
-            } else if (maxCount == count) {
-                sb.append(" ").append(i);
+            }
+            countList.add(count);
+        }
+
+        for (int i = 0; i < countList.size(); i++) {
+            if (maxCount == countList.get(i)) {
+                sb.append(i + 1).append(" ");
             }
         }
 
