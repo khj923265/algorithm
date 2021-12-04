@@ -14,6 +14,7 @@ public class NumberOfIsland4963 {
 
         // 유기농배추문제와 비슷 대각선까지 생각만 하면 되는 문제 같음
         // (i-1,j-1),(i+1,j-1),(i-1,j+1),(i+1,j+1) 4가지 추가하면 될듯?
+        // 생각보다 구현하는게 쉽지 않았음
 
         StringBuilder sb = new StringBuilder();
 
@@ -55,7 +56,6 @@ public class NumberOfIsland4963 {
         if (i < H && j < W) {
             if (!visit[i][j] && list[i][j] == 1) {
                 visit[i][j] = true;
-
                 
                 dfs(i + 1, j + 1);
                 dfs(i,j + 1);
