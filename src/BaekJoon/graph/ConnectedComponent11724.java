@@ -3,8 +3,8 @@ package BaekJoon.graph;
 public class ConnectedComponent11724 {
     private static int N;
     private static int M;
-    private static int[][] list;
-    private static boolean[] visit;
+    private static int[][] numberList;
+    private static boolean[] visitCheck;
 
     public static void main(String[] args) throws Exception {
         /**
@@ -16,33 +16,33 @@ public class ConnectedComponent11724 {
 
         N = read();
         M = read();
-        list = new int[N][N];
-        visit = new boolean[N];
-        int count = 0;
+        numberList = new int[N][N];
+        visitCheck = new boolean[N];
+        int ComponentCount = 0;
 
         while (M --> 0) {
             int u = read() - 1;
             int y = read() - 1;
 
-            list[u][y] = 1;
-            list[y][u] = 1;
+            numberList[u][y] = 1;
+            numberList[y][u] = 1;
         }
 
         for (int i = 0; i < N; i++) {
-            if (!visit[i]) {
+            if (!visitCheck[i]) {
                 dfs(i);
-                count++;
+                ComponentCount++;
             }
         }
-        System.out.println(count);
+        System.out.println(ComponentCount);
     }
 
     private static void dfs(int n) {
-        if (visit[n]) return;
+        if (visitCheck[n]) return;
 
-        visit[n] = true;
+        visitCheck[n] = true;
         for (int i = 0; i < N; i++) {
-            if (list[n][i] == 1) {
+            if (numberList[n][i] == 1) {
                 dfs(i);
             }
         }
