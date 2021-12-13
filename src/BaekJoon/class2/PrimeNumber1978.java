@@ -7,8 +7,10 @@ public class PrimeNumber1978 {
          * 소수 찾기 문제
          */
 
+        // 에라토스테네스의 체 방식 (값이 크고 반복이 많을 경우 유리할 것 같음)
         // 1과 자기자신을 제외 후 2, 3, 5, 7 의 배수에 해당하는 값은 삭제
-        // % 가 아니라 배수를 탐색해서 지워야 함
+
+        // 1과 자기 자신을 제외 후 찾고자 하는 값의 제곱근 까지 % 가 0인지 확인하기
 
         int N = read();
         int count = 0;
@@ -16,14 +18,17 @@ public class PrimeNumber1978 {
         while (N --> 0) {
             int number = read();
             if (number == 1) continue;
-            if (number == 2 || number == 3 || number == 5 || number == 7) {
-                count++;
-            } else if (number%2 != 0 && number%3 != 0 && number%5 != 0 && number%7 != 0){
-                count++;
-            }
+            if (isPrimeNumber(number)) count++;
         }
         System.out.println(count);
 
+    }
+
+    private static boolean isPrimeNumber(int number) {
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number %i == 0) return false;
+        }
+        return true;
     }
 
     private static int read() throws Exception {
@@ -37,5 +42,4 @@ public class PrimeNumber1978 {
         }
         return isNegative ? ~n + 1 : n;
     }
-
 }
