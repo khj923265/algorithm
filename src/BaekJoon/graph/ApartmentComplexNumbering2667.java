@@ -3,9 +3,8 @@ package BaekJoon.graph;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.stream.Stream;
 
@@ -21,11 +20,15 @@ public class ApartmentComplexNumbering2667 {
          * 단지번호붙이기 문제
          */
 
+        // 결과값을 리스트에 넣어서 정렬 후 출력을 했는데
+        // 우선순위 큐 라는 걸 보게되어서 사용해봄 이런경우 편리할듯
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
         N = Integer.parseInt(br.readLine());
 
-        List<Integer> list = new ArrayList<>();
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
         apartments = new int[N][N];
 
         for (int i = 0; i < N; i++) {
@@ -35,20 +38,18 @@ public class ApartmentComplexNumbering2667 {
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                apartmentCount = bfs(i, j);
-                if (0 < apartmentCount) {
-                    list.add(apartmentCount);
+                if (apartments[i][j] == 1) {
+                    apartmentCount = bfs(i, j);
+                    priorityQueue.add(apartmentCount);
                 }
             }
         }
 
-        System.out.println(list.size());
-        for (int a : list) {
-            System.out.println(a);
+        sb.append(priorityQueue.size()).append("\n");
+        while (!priorityQueue.isEmpty()) {
+            sb.append(priorityQueue.poll()).append("\n");
         }
-
-
-
+        System.out.println(sb);
     }
 
     private static int bfs (int row, int col) {
@@ -68,9 +69,9 @@ public class ApartmentComplexNumbering2667 {
 
             for (int i = 0; i < 4; i++) {
                 int mx = x + dx[i];
-                int my = x + dy[i];
+                int my = y + dy[i];
 
-                if (0 < mx && 0 < my && mx < N && my < N && apartments[mx][my] == 1) {
+                if (0 <= mx && 0 <= my && mx < N && my < N && apartments[mx][my] == 1) {
                     apartments[mx][my] = 0;
                     count++;
                     queue.offer(new Apartment(mx, my));
@@ -89,6 +90,5 @@ public class ApartmentComplexNumbering2667 {
             this.y = y;
         }
     }
-
 
 }
