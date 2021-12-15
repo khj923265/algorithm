@@ -9,8 +9,6 @@ public class Tomato7576 {
     private static int N;
     private static int M;
     private static int[][] baxList;
-    private static boolean[][] visitCheck;
-    private static int appleCount;
     private static int numberOfDays;
     private static Queue<Tomato> queue;
 
@@ -23,36 +21,34 @@ public class Tomato7576 {
         M = read();
         N = read();
         baxList = new int[N][M];
-        visitCheck = new boolean[N][M];
         numberOfDays = 0;
         queue = new LinkedList<>();
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 baxList[i][j] = read();
-                if (baxList[i][j] == 0) appleCount++;
                 if (baxList[i][j] == 1) queue.offer(new Tomato(i, j, 1));
             }
         }
 
-        if (M*N == appleCount) {
-            System.out.println(-1);
-            return;
-        }
-
         bfs();
 
+        if (isZeroCheck()) return;
+
+        System.out.println(numberOfDays - 1);
+
+    }
+
+    private static boolean isZeroCheck() {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 if (baxList[i][j] == 0) {
                     System.out.println(-1);
-                    return;
+                    return true;
                 }
             }
         }
-
-        System.out.println(numberOfDays - 1);
-
+        return false;
     }
 
     private static void bfs () {
@@ -62,9 +58,8 @@ public class Tomato7576 {
             for (int i = 0; i < 4; i++) {
                 int x = dx[i] + tomato.x;
                 int y = dy[i] + tomato.y;
-                if (0 <= x && 0 <= y && x < N && y < M && !visitCheck[x][y] && baxList[x][y] == 0) {
+                if (0 <= x && 0 <= y && x < N && y < M && baxList[x][y] == 0) {
                     baxList[x][y] = tomato.days;
-                    visitCheck[x][y] = true;
                     queue.offer(new Tomato(x,y,tomato.days + 1));
                 }
             }
