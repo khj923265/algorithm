@@ -8,7 +8,6 @@ public class HideAndSeek1697 {
     private static int[] visit;
     private static int brotherLocation;
     private static int currentLocation;
-    private static int count;
 
     public static void main(String[] args) throws Exception {
         /**
@@ -19,7 +18,6 @@ public class HideAndSeek1697 {
 
         queue = new LinkedList<>();
         visit = new int[100_001];
-        count = 0;
 
         currentLocation = read();
         brotherLocation = read();
