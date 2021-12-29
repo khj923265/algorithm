@@ -11,6 +11,8 @@ public class NumberCard10816 {
          * 숫자 카드2 문제
          */
 
+        // 이분탐색에서 10 10 10 에서 가장 첫번째를 찾아야하는데 중간을 찾을 수도 있어서 틀렸습니다. 뜸
+
         StringBuilder sb = new StringBuilder();
         list = new ArrayList<>();
 
