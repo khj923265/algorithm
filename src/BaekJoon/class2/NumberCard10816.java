@@ -11,8 +11,6 @@ public class NumberCard10816 {
          * 숫자 카드2 문제
          */
 
-        // 이분탐색에서 10 10 10 에서 가장 첫번째를 찾아야하는데 중간을 찾을 수도 있어서 틀렸습니다. 뜸
-
         StringBuilder sb = new StringBuilder();
         list = new ArrayList<>();
 
@@ -27,50 +25,42 @@ public class NumberCard10816 {
 
         for (int i = 0; i < M; i++) {
             int number = read();
-            int startIndex = binarySearch(number, 0, list.size()- 1 );
-            int count = 0;
-            if (startIndex != -1) {
-                count = countNumber(startIndex, number);
-            }
-            sb.append(count).append(" ");
-        }
 
+            sb.append(binarySearchUpper(number, 0, list.size()) - binarySearchLow(number, 0, list.size())).append(" ");
+        }
         System.out.println(sb);
     }
 
-    private static int binarySearch(int targetNumber, int low, int high) {
+    private static int binarySearchLow(int targetNumber, int low, int high) {
         int mid;
 
-        while(low <= high) {
+        while(low < high) {
             mid = (low + high) / 2;
 
-            if(targetNumber == list.get(mid)) {
-                return mid;
-            } else if(targetNumber < list.get(mid)) {
-                high = mid - 1;
+            if(targetNumber <= list.get(mid)) {
+                high = mid;
             } else {
                 low = mid + 1;
             }
         }
 
-        return -1; // 탐색 실패
+        return low;
     }
 
-    private static int countNumber(int startIndex, int targetNumber) {
-        int count = 0;
+    private static int binarySearchUpper(int targetNumber, int low, int high) {
+        int mid;
 
-        while (true) {
-            if (startIndex < list.size()) {
-                if (list.get(startIndex) == targetNumber) {
-                    count++;
-                } else {
-                    return count;
-                }
+        while(low < high) {
+            mid = (low + high) / 2;
+
+            if(targetNumber < list.get(mid)) {
+                high = mid;
             } else {
-                return count;
+                low = mid + 1;
             }
-            startIndex++;
         }
+
+        return low;
     }
 
     private static int read() throws Exception {
