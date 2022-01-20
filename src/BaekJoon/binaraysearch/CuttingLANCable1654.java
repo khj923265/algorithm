@@ -3,36 +3,38 @@ package BaekJoon.binaraysearch;
 import java.util.Arrays;
 
 public class CuttingLANCable1654 {
-    private static int[] list;
+    private static long[] list;
+    private static int cableOfNumber;
+    private static int necessaryCableOfNumber;
 
     public static void main(String[] args) throws Exception {
         /**
          * 랜선 자르기 문제
          */
 
-        int cableOfNumber = read();
-        int necessaryCableOfNumber = read();
+        cableOfNumber = read();
+        necessaryCableOfNumber = read();
 
-        list = new int[cableOfNumber];
+        list = new long[cableOfNumber];
         for (int i = 0; i < cableOfNumber; i++) {
             list[i] = read();
         }
 
         Arrays.sort(list);
+        long result = binarySearch();
 
+        System.out.println(result);
     }
 
-    private static int binarySearch() {
-        int start = 0;
-        int end = list[list.length - 1];
-        int mid;
+    private static long binarySearch() {
+        long start = 0;
+        long end = list[list.length - 1];
+        long mid;
 
         while (start <= end) {
             mid = (start + end) / 2;
 
-            // 여기서부터 로직 수행하면 될듯?
-
-            if (list[mid] <= target) {
+            if (necessaryCableOfNumber <= getCutCableOfNumber(mid)) {
                 start = mid + 1;
             }
             else {
@@ -43,6 +45,14 @@ public class CuttingLANCable1654 {
         return end;
     }
 
+    private static int getCutCableOfNumber(long length) {
+        int count = 0;
+        for (long cableLength : list) {
+            count += cableLength / length;
+        }
+        return count;
+    }
+
     private static int read() throws Exception {
         int c, n = System.in.read() & 15;
         boolean isNegative = n == 13;
@@ -50,5 +60,4 @@ public class CuttingLANCable1654 {
         while ((c = System.in.read()) > 32) n = (n << 3) + (n << 1) + (c & 15);
         return isNegative ? ~n + 1 : n;
     }
-
 }
