@@ -12,6 +12,18 @@ public class CuttingLANCable1654 {
          * 랜선 자르기 문제
          */
 
+        // 802
+        // 743
+        // 457
+        // 539
+
+        // 457 , 539 , 743 , 802
+        // 1,    1,    1,    2  =  5  <  11
+        // 2,     2,  , 3,  , 4  = 11 =  11
+        // 0 , 802 최대값
+        //  401
+        //  0 ~ 400  = 200
+
         cableOfNumber = read();
         necessaryCableOfNumber = read();
 
