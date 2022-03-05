@@ -2,8 +2,9 @@ package BaekJoon.practice;
 
 public class OperatorInterleave14888 {
     private static int[] numbers;
-    private static int[] operators;
-    private static int[] operators2;
+    private static int[] operatorsIndex;
+    private static int maxNumber;
+    private static int minNumber;
     private static int N;
 
     public static void main(String[] args) throws Exception {
@@ -11,58 +12,51 @@ public class OperatorInterleave14888 {
          * 연산자 끼워넣기 문제
          */
 
-        // 덧셈 / 뺄셈 / 곱셈 / 나눗셈
-
-        //TODO 수정해야함!
+        // 정답은 나왔으나 왜 백트래킹인지 이해를 못함
 
         N = read();
         numbers = new int[N];
-        operators = new int[4];
-        operators2 = new int[4];
+        operatorsIndex = new int[4];
+        maxNumber = Integer.MIN_VALUE;
+        minNumber = Integer.MAX_VALUE;
+
 
         insertNumbers();
         insertOperators();
 
-        int maxNum = numbers[0];
-        int minNum = numbers[0];
+        DFS(numbers[0],1);
 
-        for (int i = 1; i < N; i++) {
-            if (0 < operators[1]) {
-                maxNum -= numbers[i];
-                --operators[1];
-            } else if (0 < operators[3]){
-                maxNum /= numbers[i];
-                --operators[3];
-            } else if (0 < operators[0]){
-                maxNum += numbers[i];
-                --operators[0];
-            } else if (0 < operators[2]){
-                maxNum *= numbers[i];
-                --operators[2];
-            }
-        }
-
-        for (int i = 1; i < N; i++) {
-            if (0 < operators2[0]) {
-                minNum += numbers[i];
-                --operators2[0];
-            } else if (0 < operators2[3]){
-                minNum /= numbers[i];
-                --operators2[3];
-            } else if (0 < operators2[1]){
-                minNum -= numbers[i];
-                --operators2[1];
-            } else if (0 < operators2[2]){
-                minNum *= numbers[i];
-                --operators2[2];
-            }
-        }
-        System.out.println(maxNum);
-        System.out.println(minNum);
-
+        System.out.println(maxNumber);
+        System.out.println(minNumber);
     }
 
-    private static void calculateNumbers() {
+    private static void DFS(int num, int count) {
+        if (count == N) {
+            maxNumber = Math.max(maxNumber, num);
+            minNumber = Math.min(minNumber, num);
+            return;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (0 < operatorsIndex[i]) {
+                operatorsIndex[i]--;
+                switch (i) {
+                    case 0:
+                        DFS(num + numbers[count], count + 1);
+                        break;
+                    case 1:
+                        DFS(num - numbers[count], count + 1);
+                        break;
+                    case 2:
+                        DFS(num * numbers[count], count + 1);
+                        break;
+                    case 3:
+                        DFS(num / numbers[count], count + 1);
+                        break;
+                }
+                operatorsIndex[i]++;
+            }
+        }
 
     }
 
@@ -74,9 +68,7 @@ public class OperatorInterleave14888 {
 
     private static void insertOperators() throws Exception {
         for (int i = 0; i < 4; i++) {
-            int num = read();
-            operators[i] = num;
-            operators2[i] = num;
+            operatorsIndex[i] = read();
         }
     }
 
