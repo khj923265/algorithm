@@ -1,13 +1,10 @@
 package BaekJoon.greedy;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MeetingRoomAssignment {
-    private static int startTime;
-    private static int endTime;
+public class MeetingRoomAssignment1931 {
     private static int[][] scheduleList;
     private static int maxCount;
     private static int previousScheduleEndTime;
@@ -27,10 +24,14 @@ public class MeetingRoomAssignment {
             scheduleList[i][1] = read();
         }
 
-        //TODO 회의종료시간이 같을 경우 시작시간으로 재정렬해야함
         List<int[]> sortedScheduleList = Arrays.stream(scheduleList)
-                .sorted(Comparator.comparingInt(value -> value[1]))
-                .collect(Collectors.toList());
+                .sorted((o1, o2) -> {
+                    if (o1[1] == o2[1]) {
+                        return Integer.compare(o1[0], o2[0]);
+                    } else {
+                        return Integer.compare(o1[1], o2[1]);
+                    }
+                }).collect(Collectors.toList());
 
         previousScheduleEndTime = sortedScheduleList.get(0)[1];
 
