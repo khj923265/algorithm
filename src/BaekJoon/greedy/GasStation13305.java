@@ -25,6 +25,7 @@ public class GasStation13305 {
 
         long cheapPrice = prices[0];
         long spentMoney = prices[0] * distances[0];
+
         for (int i = 1; i < N - 1; i++) {
             if (cheapPrice >= prices[i]) {
                 cheapPrice = prices[i];
