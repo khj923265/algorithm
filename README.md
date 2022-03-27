@@ -14,7 +14,7 @@
 ## 코딩테스트 사이트 바로가기
 
 * **Baekjoon** : https://www.acmicpc.net/
-* **JungOl : http://jungol.co.kr/
+* **JungOl** : http://jungol.co.kr/
 * **Programmers** : https://programmers.co.kr/learn/challenges
 * **Codility** : https://app.codility.com/programmers/
 
