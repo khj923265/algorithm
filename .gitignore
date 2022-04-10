@@ -1,5 +1,5 @@
 #테스트 코딩
-test/**
+src/test/**
 
 # Compiled class file
 *.class
