@@ -23,6 +23,9 @@ public class PrincessGarden2461 {
             this.endDay = endDay;
         }
 
+        /**
+         * 꽃이 피는 날짜를 기준으로 정렬하되 피는 날짜가 같으면 꽃이 지는 날짜를 기준으로 정렬
+         */
         @Override
         public int compareTo(Period o) {
             if (startMonth == o.startMonth) {
