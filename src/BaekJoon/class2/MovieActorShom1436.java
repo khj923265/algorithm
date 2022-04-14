@@ -8,7 +8,7 @@ public class MovieActorShom1436 {
 
     public static void main(String[] args) throws IOException {
         /**
-         * 영화감독 숌 문제 (소수 관련)
+         * 영화감독 숌 문제
          */
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
