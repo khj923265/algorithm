@@ -47,7 +47,7 @@ public class Sudoku1824 {
 
         if (sudokuList[row][col] == '0') {
             for (int i = 1; i <= 9; i++) {
-                if (possibility(row, col, (char)(i + '0'))) {
+                if (isPossibility(row, col, (char)(i + '0'))) {
                     sudokuList[row][col] = (char)(i + '0');
                     sudoku(row, col + 1);
                 }
@@ -58,7 +58,7 @@ public class Sudoku1824 {
         sudoku(row, col + 1);
     }
 
-    public static boolean possibility(int row, int col, char value) {
+    public static boolean isPossibility(int row, int col, char value) {
 
         // 같은 행,열 에 있는 원소들 중 겹치는 열 원소가 있는지 검사.
         for (int i = 0; i < 9; i++) {
