@@ -32,28 +32,31 @@ public class Bishop1662 {
         bishop(0, 0, 0);
         result = maxCount;
         maxCount = 0;
-        bishop(1, 1, 0);
+        bishop(0, 1, 0);
         result += maxCount;
 
         System.out.println(result);
     }
     public static void bishop(int row, int col, int count) {
-        if (N <= col) {
+        if (N < col) {
+            bishop(row + 1, 1, count);
+            return;
+        }
+        if (N == col) {
             bishop(row + 1, 0, count);
             return;
         }
 
-        if (N <= row) {
+        if (N == row) {
             maxCount = Math.max(maxCount, count);
             return;
         }
 
-        if (list[row][col] == 0) {
+        if (list[row][col] == 1) {
             if (isPossibility(row, col)) {
                 list[row][col] = -1;
                 bishop(row, col + 2, count + 1);
-                list[row][col] = 0;
-                return;
+                list[row][col] = 1;
             }
         }
         bishop(row, col + 2, count);
@@ -71,9 +74,11 @@ public class Bishop1662 {
             }
         } else if (col == N - 1) {
             // 왼쪽 상단만 탐색
-            for (int i = 1; i <= col; i++) {
-                if (list[i][col - i] == -1) {
-                    return false;
+            for (int i = 1; i <= row; i++) {
+                if (row - i >= 0 && col - i >= 0) {
+                    if (list[row - i][col - i] == -1) {
+                        return false;
+                    }
                 }
             }
         } else {
@@ -82,9 +87,11 @@ public class Bishop1662 {
                     return false;
                 }
             }
-            for (int i = 1; i <= col; i++) {
-                if (list[i][col - i] == -1) {
-                    return false;
+            for (int i = 1; i <= row; i++) {
+                if (row - i >= 0 && col - i >= 0) {
+                    if (list[row - i][col - i] == -1) {
+                        return false;
+                    }
                 }
             }
         }
