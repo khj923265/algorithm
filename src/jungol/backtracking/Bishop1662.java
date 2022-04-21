@@ -18,7 +18,7 @@ public class Bishop1662 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int result = 0;
 
-        N = Integer.parseInt(br.readLine());
+        N = Integer.parseInt(br.readLine().trim());
 
         list = new int[N][N];
 
@@ -29,6 +29,7 @@ public class Bishop1662 {
             }
         }
 
+        // col 의 시작을 0, 1 로 나누어 체스판 처럼 분기처리
         bishop(0, 0, 0);
         result = maxCount;
         maxCount = 0;
@@ -38,13 +39,26 @@ public class Bishop1662 {
         System.out.println(result);
     }
     public static void bishop(int row, int col, int count) {
-        if (N < col) {
-            bishop(row + 1, 1, count);
-            return;
-        }
-        if (N == col) {
-            bishop(row + 1, 0, count);
-            return;
+        // N 이 짝수일 경우와 홀수일 경우가 달라서 분기처리
+        if (N%2 == 1) {
+            if (N < col) {
+                bishop(row + 1, 1, count);
+                return;
+            }
+            if (N == col) {
+                bishop(row + 1, 0, count);
+                return;
+            }
+        } else {
+            if (N == col) {
+                bishop(row + 1, 1, count);
+                return;
+            }
+            if (N < col) {
+                bishop(row + 1, 0, count);
+                return;
+            }
+
         }
 
         if (N == row) {
@@ -67,31 +81,31 @@ public class Bishop1662 {
 
         if (col == 0) {
             // 오른쪽 상단만 탐색
-            for (int i = 0; i < row; i++) {
-                if (list[i][row - i] == -1) {
+            for (int i = 1; i <= row; i++) {
+                if (N <= col + i) break;
+                if (list[row - i][col + i] == -1) {
                     return false;
                 }
             }
         } else if (col == N - 1) {
             // 왼쪽 상단만 탐색
             for (int i = 1; i <= row; i++) {
-                if (row - i >= 0 && col - i >= 0) {
-                    if (list[row - i][col - i] == -1) {
-                        return false;
-                    }
+                if (col - i < 0) break;
+                if (list[row - i][col - i] == -1) {
+                    return false;
                 }
             }
         } else {
-            for (int i = 0; i < row; i++) {
-                if (list[i][row - i] == -1) {
+            for (int i = 1; i <= row; i++) {
+                if (N <= col + i) break;
+                if (list[row - i][col + i] == -1) {
                     return false;
                 }
             }
             for (int i = 1; i <= row; i++) {
-                if (row - i >= 0 && col - i >= 0) {
-                    if (list[row - i][col - i] == -1) {
-                        return false;
-                    }
+                if (col - i < 0) break;
+                if (list[row - i][col - i] == -1) {
+                    return false;
                 }
             }
         }
