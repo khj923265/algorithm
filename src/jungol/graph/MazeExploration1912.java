@@ -40,6 +40,9 @@ public class MazeExploration1912 {
             rooms.get(secondNumber).add(firstNumber);
         }
 
+        for (List<Integer> list : rooms) {
+            list.sort(Integer::compareTo);
+        }
         dfs(0);
     }
 
@@ -50,8 +53,6 @@ public class MazeExploration1912 {
             printResult();
             System.exit(0);
         }
-
-        rooms.get(roomNumber).sort(Integer::compareTo);
         for (int nextRoomNumber : rooms.get(roomNumber)) {
             if (!visited[nextRoomNumber]) {
                 dfs(nextRoomNumber);
