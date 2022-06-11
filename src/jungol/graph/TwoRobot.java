@@ -26,6 +26,8 @@ public class TwoRobot {
         N = Integer.parseInt(st.nextToken());
         A_ROBOT_NODE = Integer.parseInt(st.nextToken()) - 1;
         B_ROBOT_NODE = Integer.parseInt(st.nextToken()) - 1;
+
+        // N 이 1이거나 A 로봇과 B 로봇이 같은 곳에 있을 수 있음
         if (N == 1) {
             System.out.println(0);
             return;
@@ -52,6 +54,8 @@ public class TwoRobot {
             tree.get(A).add(new Node(B, distance));
             tree.get(B).add(new Node(A, distance));
         }
+
+        // 위에 전부 입력값 저장하는 부분
 
         int result = findMinimumTravelDistance();
         System.out.println(result);
