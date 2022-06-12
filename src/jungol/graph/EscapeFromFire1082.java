@@ -32,10 +32,12 @@ public class EscapeFromFire1082 {
             map[i] = br.readLine().toCharArray();
             for (int j = 0; j < COL; j++) {
                 if (map[i][j] == 'S') {
+                    // 입력값 넣으면서 용사의 위치를 가장 먼저 저장
                     queue.offer(new Coordinate(j, i, 0, 'S'));
                 }
             }
         }
+        // 화염의 위치 저장
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 if (map[i][j] == '*') {
