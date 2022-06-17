@@ -11,7 +11,7 @@ public class Robot1006 {
     private static int N; // 세로길이
     private static int M; // 가로길이
     private static int[][] track;
-    private static boolean[][] visited;
+    private static int[][][] visited;
     private static Coordinate startCoordinate;
     private static Coordinate endCoordinate;
     private static int[] dx = { 1, -1, 0, 0 }; // 0:동 1:서 2:남 3:북
@@ -52,39 +52,41 @@ public class Robot1006 {
 //                if (r < 0 || c < 0 || N <= r || M <= c) continue;
 //                if (track[r][c] == 1) continue;
                 // 0:동(x+1) 1:서(x-1) 2:남(y+1) 3:북(y-1)
-                // 반복문 전에 count 에 방향전환 count 추가해줘야함
+                // bfs 여도 방향때문에 최소가 보장이 안됨
+                // 그래서 방문에 방향까지 추가해서 방향이 같을경우 count 값 비교해서
+                // 최소로 count 할수 있는 값으로 변경
                 for (int j = 1; j <= 3; j++) {
                     if (i == 0) {
                         c = col + j;
-                        if (M <= c || visited[r][c]) continue;
-                        if (track[r][c] == 1) break;
-                        int directionCount = getDirectionCount(coordinate.direction, i);
-                        visited[r][c] = true;
-                        queue.offer(new Coordinate(r, c, i, coordinate.count + directionCount + 1));
+                        if (M <= c || track[r][c] == 1) break;
+                        int directionCount = getDirectionCount(coordinate.direction, i) + coordinate.count + 1;
+                        if (visited[r][c][0] != 0 && visited[r][c][0] <= directionCount) continue;
+                        visited[r][c][0] = directionCount;
+                        queue.offer(new Coordinate(r, c, i, directionCount));
                     }
                     if (i == 1) {
                         c = col - j;
-                        if (c < 0 || visited[r][c]) continue;
-                        if (track[r][c] == 1) break;
-                        int directionCount = getDirectionCount(coordinate.direction, i);
-                        visited[r][c] = true;
-                        queue.offer(new Coordinate(r, c, i, coordinate.count + directionCount + 1));
+                        if (c < 0 || track[r][c] == 1) break;
+                        int directionCount = getDirectionCount(coordinate.direction, i) + coordinate.count + 1;
+                        if (visited[r][c][1] != 0 && visited[r][c][1] <= directionCount) continue;
+                        visited[r][c][1] = directionCount;
+                        queue.offer(new Coordinate(r, c, i, directionCount));
                     }
                     if (i == 2) {
                         r = row + j;
-                        if (N <= r || visited[r][c]) continue;
-                        if (track[r][c] == 1) break;
-                        int directionCount = getDirectionCount(coordinate.direction, i);
-                        visited[r][c] = true;
-                        queue.offer(new Coordinate(r, c, i, coordinate.count + directionCount + 1));
+                        if (N <= r || track[r][c] == 1) break;
+                        int directionCount = getDirectionCount(coordinate.direction, i) + coordinate.count + 1;
+                        if (visited[r][c][2] != 0 && visited[r][c][2] <= directionCount) continue;
+                        visited[r][c][2] = directionCount;
+                        queue.offer(new Coordinate(r, c, i, directionCount));
                     }
                     if (i == 3) {
                         r = row - j;
-                        if (r < 0 || visited[r][c]) continue;
-                        if (track[r][c] == 1) break;
-                        int directionCount = getDirectionCount(coordinate.direction, i);
-                        visited[r][c] = true;
-                        queue.offer(new Coordinate(r, c, i, coordinate.count + directionCount + 1));
+                        if (r < 0 || track[r][c] == 1) break;
+                        int directionCount = getDirectionCount(coordinate.direction, i) + coordinate.count + 1;
+                        if (visited[r][c][3] != 0 && visited[r][c][3] <= directionCount) continue;
+                        visited[r][c][3] = directionCount;
+                        queue.offer(new Coordinate(r, c, i, directionCount));
                     }
                 }
             }
@@ -100,7 +102,7 @@ public class Robot1006 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         track = new int[N][M];
-        visited = new boolean[N][M];
+        visited = new int[N][M][4];
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine(), " ");
