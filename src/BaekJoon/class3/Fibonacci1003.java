@@ -5,32 +5,31 @@ public class Fibonacci1003 {
      * 피보나치 함수 문제
      */
 
-    private static int zeroCount = 0;
-    private static int oneCount = 0;
+    private static Integer[][] dp = new Integer[41][2];
 
     public static void main(String[] args) throws Exception {
         StringBuilder sb = new StringBuilder();
         int testCase = read();
 
+        dp[0][0] = 1;	// N=0 일 때의 0 호출 횟수
+        dp[0][1] = 0;	// N=0 일 때의 1 호출 횟수
+        dp[1][0] = 0;	// N=1 일 때의 0 호출 횟수
+        dp[1][1] = 1;	// N=1 일 때의 1 호출 횟수
+
         for (int i = 0; i < testCase; i++) {
             int n = read();
             fibonacci(n);
-            sb.append(zeroCount).append(" ").append(oneCount).append("\n");
-            zeroCount = 0;
-            oneCount = 0;
+            sb.append(dp[n][0]).append(" ").append(dp[n][1]).append("\n");
         }
         System.out.println(sb);
     }
 
-    public static void fibonacci(int n) {
-        if (n == 0) {
-            zeroCount = zeroCount + 1;
-        } else if (n == 1) {
-            oneCount = oneCount + 1;
-        } else {
-            fibonacci(n - 1);
-            fibonacci(n - 2);
+    public static Integer[] fibonacci(int n) {
+        if (dp[n][0] == null || dp[n][1] == null) {
+            dp[n][0] = fibonacci(n - 1)[0] + fibonacci(n - 2)[0];
+            dp[n][1] = fibonacci(n - 1)[1] + fibonacci(n - 2)[1];
         }
+        return dp[n];
     }
 
     private static int read() throws Exception {
