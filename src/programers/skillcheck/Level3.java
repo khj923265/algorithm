@@ -3,6 +3,7 @@ package programers.skillcheck;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Level3 {
 
@@ -82,5 +83,64 @@ public class Level3 {
         }
 
         return answer;
+    }
+
+    // 음원 스트리밍 장르별 순서 문제
+    // 장르별 합산이 가장 많은순으로 장르를 정렬, 같은 장르끼리 재생이 많은수으로 정렬 후 2개만 등록(같을경우 고유번호순으로)
+    public int[] solution(String[] genres, int[] plays) {
+        int[] answer = {};
+        int musicSize = genres.length;
+
+        answer = IntStream.range(0, musicSize)
+                .mapToObj(i -> new Music(genres[i], plays[i], i))
+                .collect(Collectors.groupingBy(Music::getGenre))
+                .entrySet().stream()
+                .sorted((o1, o2) -> sum(o2.getValue()) - sum(o1.getValue()))
+                .flatMap(x -> x.getValue().stream().sorted().limit(2))
+                .mapToInt(Music::getIndex)
+                .toArray();
+
+        return answer;
+    }
+
+    private int sum(List<Music> musicList) {
+        int sum = 0;
+        for (Music music : musicList) {
+            sum = sum + music.getPlay();
+        }
+        return sum;
+    }
+
+
+    static class Music implements Comparable<Music>{
+        String genre;
+        int play;
+        int index;
+
+        public Music(String genre, int play, int index) {
+            this.genre = genre;
+            this.play = play;
+            this.index = index;
+        }
+
+        public String getGenre() {
+            return genre;
+        }
+
+        public int getPlay() {
+            return play;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        @Override
+        public int compareTo(Music o) {
+            if (this.play == o.getPlay()) {
+                return this.index - o.getIndex();
+            }
+            return o.getPlay() - this.play;
+        }
     }
 }
