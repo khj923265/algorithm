@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.PriorityQueue;
 
-public class MinHeep1927 {
+public class MaxHeep11279 {
 
     /**
-     * 최소 힙 문제
+     * 최대 힙 문제
      */
 
     public static void main(String[] args) throws IOException {
@@ -17,7 +17,7 @@ public class MinHeep1927 {
         int N = Integer.parseInt(br.readLine());
 
         int number;
-        PriorityQueue<Integer> q = new PriorityQueue<>();
+        PriorityQueue<Integer> q = new PriorityQueue<>(Collections.reverseOrder());
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < N; i++) {
             number = Integer.parseInt(br.readLine());
